@@ -81,14 +81,14 @@ class AppFixtures extends Fixture
 
     protected function articlesFixtures($manager)
     {
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $artilcle[$i] = new Articles;
             $artilcle[$i]->setFkCategories($this->getRandonReference(CAtegories::class, $manager));
             $artilcle[$i]->setFkTeam($this->getReferencedObject(Team::class, 1, $manager));
             $artilcle[$i]->setTitre($this->faker->word());
             $artilcle[$i]->setArticle($this->faker->text(100));
             $artilcle[$i]->setDate($this->faker->dateTime());
-            $artilcle[$i]->setLogo('https://loremflickr.com/640/480/pets');
+            $artilcle[$i]->setLogo('https://loremflickr.com/640/480/pets?rand=' . '{' . rand(1, 999) . '}');
             $manager->persist($artilcle[$i]);
         }
         $manager->flush();

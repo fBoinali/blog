@@ -21,7 +21,8 @@
         {% for article in articles %}
             <tr>
                 <td>{{ article.id }}</td>
-                <td>{{ article.fk_categories}}</td>
+                <td>{{ article.getFkCategories()}} </td>
+
                 <td>{{ article.titre }}</td>
                 <td><img src="{{ article.logo }}" height="50px" width="auto" alt="image de l'article"></td>
                 <td>{{ article.article }}</td>

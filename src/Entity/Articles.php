@@ -150,7 +150,7 @@ class Articles
 
         return $this;
     }
-
+    // Transformer l'objet article en chaine de caractère.
     public function __toString()
     {
         return $this->titre;

@@ -17,17 +17,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArticlesController extends AbstractController
 {
     #[Route('/list/{idCategorie?}', name: 'app_articles_index', methods: ['GET'])]
-    public function index(ArticlesRepository $articlesRepository,
-                         $idCategorie ): Response
+    public function index(ArticlesRepository $articlesRepository, $idCategorie ): Response
     {
-        $listArticlesCateg;
-        //dd($idCategorie);
-        if ($idCategorie){
-            //dd($idCategorie);
+        // Regroupe les articles par catégorie.
+        if ($idCategorie) {
             $listArticlesCateg = $articlesRepository->findBy(['fk_categories'=> $idCategorie]);
-           //dd ($listArticlesCateg);
         }
-        else{
+        else {
             $listArticlesCateg = $articlesRepository->findAll();
         }
         //dd($categorie);
