@@ -7,14 +7,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-#[Route(path: '/admin')]
-class SecurityTeamController extends AbstractController
+#[Route(path: '/account')]
+class SecurityAccountController extends AbstractController
 {
-    #[Route(path: '/login', name: 'app_login')]
+    #[Route(path: '/login', name: 'user_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-             return $this->redirectToRoute('app_admin');
+             return $this->redirectToRoute('app_account');
         }
 
         // get the login error if there is one
@@ -25,9 +25,9 @@ class SecurityTeamController extends AbstractController
         return $this->render('admin/login/admin_login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/logout', name: 'user_logout')]
     public function logout(): Response
     {
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('user_login');
     }
 }

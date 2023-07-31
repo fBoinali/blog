@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 #[Route(path: '/admin')]
 class SecurityTeamController extends AbstractController
 {
-    #[Route(path: '/login', name: 'app_login')]
+    #[Route(path: '/login', name: 'admin_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
@@ -25,9 +25,9 @@ class SecurityTeamController extends AbstractController
         return $this->render('admin/login/admin_login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/logout', name: 'admin_logout')]
     public function logout(): Response
     {
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('admin_login');
     }
 }
