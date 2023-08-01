@@ -57,13 +57,13 @@ class AppFixtures extends Fixture
 
         for ($i = 1; $i <= 2; $i++) {
             $user[$i] = new User;
-            $user[$i]->setEmail('thierry' . $i . '.chemin@thomas.fr');
+            $user[$i]->setEmail('thierry' . $i . '.thierry@thierry.fr');
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $user[$i], 'thierry123');
             $user[$i]->setPassword($hashedPassword);
             $user[$i]->setRoles(['ROLE_IDENTIFIED']);
             $user[$i]->setFirstname('thierry' . $i);
-            $user[$i]->setLastname('CHEMIN');
+            $user[$i]->setLastname('THIERRY');
             $manager->persist($user[$i]);
         }
         $manager->flush();

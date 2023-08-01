@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+<div class="my-custom-class-for-errors">
+    {{ form_errors(form) }}
+</div>
+<div class="row">
+    <div>
+        {{ form_row(form.firstname ) }}
+    </div>
+    <div>
+        {{ form_row(form.lastname) }}
+    </div>
+    <div>
+        {{ form_row(form.email) }}
+    </div>
+    <div>
+        {{ form_row(form.password) }}
+    </div>
+    <div>
+        {{ form_row(form._token) }}
+    </div>
+</div>
+<div>
+    <button class="btn" >{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

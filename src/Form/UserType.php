@@ -19,7 +19,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'email',
+                'label' => 'Email',
                 'required' => true
             ])
 
@@ -44,11 +44,11 @@ class UserType extends AbstractType
             ])
 
             ->add('firstname', TextType::class, [
-                'label' => 'firstname',
+                'label' => 'Firstname',
                 'required' => true
             ])
             ->add('lastname', TextType::class, [
-                'label' => 'lastname',
+                'label' => 'Lastname',
                 'required' => true
             ]);
 
