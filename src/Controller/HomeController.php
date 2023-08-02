@@ -2,17 +2,25 @@
 
 namespace App\Controller;
 
+use App\Entity\Articles;
+use App\Entity\Categories;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/home')]
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
-    public function index(): Response
+    #[Route('/', name: 'app_home' , methods: ['GET'])]
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $articles= $entityManager->getRepository(Articles::class)->findAll();
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'articles' => $articles
+
         ]);
     }
 }

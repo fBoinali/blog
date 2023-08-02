@@ -1,20 +1,47 @@
-{% extends 'base.html.twig' %}
+{% extends 'home/base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
 
-<div class="example-wrapper">
-    <h1>Hello {# { controller_name }}! #} ✅</h1>
+        .example-wrapper code {
+            background: #93c5fd;
+            padding: 2px 6px;
+        }
+    </style>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/SymfonyApp/blog/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/SymfonyApp/blog/templates/home/account_login.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="example-wrapper">
+        <h1>Bienvenue à la page d'accueil!{# { controller_name }}! #} ✅</h1>
+        <br>
+        <hr>
+
+        <ul>
+            {% for article in articles %}
+                <td>{{ article.getFkCategories() }} </td>
+                <br>
+                <td>{{ article.titre }}</td>
+                <br>
+                <td><img src="{{ article.logo }}" height="50px" width="auto" alt="image de l'article"></td>
+                <br>
+                <td>{{ article.article }}</td>
+                <br>
+                <td>{{ article.date ? article.date|date('d-m-Y') : '' }}</td>
+                <br>
+                <button><a href="{{ path('user_login') }}">More...</a></button>
+                <br>
+                <br>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
