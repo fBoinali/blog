@@ -47,6 +47,7 @@ class ArticlesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setDate(Carbon::now());
+
             $this->doUpload($form, $article, $fileUploaderService, $publicUploadDir);
             $entityManager->persist($article);
             $entityManager->flush();
@@ -69,13 +70,28 @@ class ArticlesController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_articles_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Articles $article, EntityManagerInterface $entityManager, FileUploaderService $fileUploaderService, $publicUploadDir): Response
+    public function edit(Request $request, Articles $article, EntityManagerInterface $entityManager, FileUploaderService $fileUploaderService, $publicUploadDir, $publicDeleteFileDir): Response
     {
         $form = $this->createForm(ArticlesType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->doUpload($form, $article, $fileUploaderService, $publicUploadDir);
+            // pour effacer le fichier dans le dossier temp de l'app
+            $file = $form['logo']->getData();
+            if ($file) {
+                $uow = $entityManager->getUnitOfWork();
+                $originalData = $uow->getOriginalEntityData($article);
+                $logo = explode('/', $originalData['logo']);
+                //passer $publicDeleteFileDir dans les parametres
+                @unlink($publicDeleteFileDir . '/' . $logo[2]);
+                $file_name = $fileUploaderService->upload($file);
+                if (null !== $file_name) {
+                    $full_path = $publicUploadDir . '/' . $file_name;
+                }
+                $article->setLogo($full_path);
+            }
+
+            $this->doUpload($article, $form, $fileUploaderService, $publicUploadDir);
             $entityManager->flush();
             return $this->redirectToRoute('app_articles_index', [], Response::HTTP_SEE_OTHER);
         }

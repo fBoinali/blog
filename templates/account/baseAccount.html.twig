@@ -17,7 +17,9 @@
 
 
 <div class="container">
-    <div>{% include '/account/_headAccount.html.twig' %}</div>
+    <div>
+        {% include '/account/partials/_sidebar.html.twig' %}
+    </div>
     <div>{% block body %}{% endblock %}</div>
 </div>
 

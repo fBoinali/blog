@@ -18,19 +18,15 @@
     </style>
 
     <div class="example-wrapper">
-        <h1>Bienvenue à la page d'accueil!{# { controller_name }}! #} ✅</h1>
+        <h1>Bienvenue à la page CATEGORIE!{# { controller_name }}! #} ✅</h1>
         <br>
         <hr>
 
         <ul>
-            {% for article in articles %}
-                <h2>{{ article.fkCategories}}</h2>
-                <h3>{{ article.titre|capitalize }}</h3>
-                <td><img src="{{ article.logo }}" height="50px" width="auto" alt="image de l'article"></td>
-                <p>{{ article.article }}</p>
-                <p>{{ article.date ? article.date|date('d-m-Y') : '' }}</p>
-                <a href="{{ path('user_login') }}">More...</a>
+            {% for categorie in categories %}
+                <h2>{{ categorie.name}}</h2>
                 <br>
+                <a class="nav-link" href="{{ path('app_homeArticles_index', {'idCategorie': categorie.id}) }}"><span>Lire les articles...</span></a>
                 <hr>
             {% else %}
                 <tr>

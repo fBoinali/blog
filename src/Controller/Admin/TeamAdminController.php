@@ -2,9 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Articles;
 use App\Entity\Team;
 use App\Form\TeamType;
 use App\Repository\TeamRepository;
+use App\Service\FileUploaderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,12 +62,17 @@ class TeamAdminController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_team_admin_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Team $team, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request,
+                         Team $team,
+                         EntityManagerInterface $entityManager,
+                         $publicDeleteFileDir,
+    ): Response
     {
         $form = $this->createForm(TeamType::class, $team);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_team_admin_index', [], Response::HTTP_SEE_OTHER);
