@@ -1,4 +1,4 @@
-{% extends 'admin/base_admin.html.twig' %}
+{% extends 'account/base_account.html.twig' %}
 
 {% block title %}User index{% endblock %}
 
@@ -27,8 +27,8 @@
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('app_accountuser_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_accountuser_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+    <a href="{{ path('app_accountuser_new') }}">Create new</a>
 {% endblock %}

@@ -38,15 +38,15 @@ class AppFixtures extends Fixture
     {
         {
             $team = new Team;
-            $team->setEmail('thomas.thomas@thomas.fr');
+            $team->setEmail('tom.tom@tom.fr');
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $team,
-                'thomas123'
+                'tom123'
             );
             $team->setPassword($hashedPassword);
             $team->setRoles(['ROLE_ADMIN']);
-            $team->setFirstname('thomas');
-            $team->setLastname('DUPONT');
+            $team->setFirstname('Tom');
+            $team->setLastname('TOM');
             $manager->persist($team);
         }
         $manager->flush();
@@ -55,15 +55,15 @@ class AppFixtures extends Fixture
     protected function userFixtures($manager)
     {
 
-        for ($i = 1; $i <= 2; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             $user[$i] = new User;
-            $user[$i]->setEmail('thierry' . $i . '.thierry@thierry.fr');
+            $user[$i]->setEmail('titi' . $i . '.titi@titi.fr');
             $hashedPassword = $this->passwordHasher->hashPassword(
-                $user[$i], 'thierry123');
+                $user[$i], '123');
             $user[$i]->setPassword($hashedPassword);
             $user[$i]->setRoles(['ROLE_IDENTIFIED']);
-            $user[$i]->setFirstname('thierry' . $i);
-            $user[$i]->setLastname('THIERRY');
+            $user[$i]->setFirstname('Titi' . $i);
+            $user[$i]->setLastname($this->faker->lastName);
             $manager->persist($user[$i]);
         }
         $manager->flush();
@@ -81,12 +81,12 @@ class AppFixtures extends Fixture
 
     protected function articlesFixtures($manager)
     {
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 15; $i++) {
             $artilcle[$i] = new Articles;
             $artilcle[$i]->setFkCategories($this->getRandonReference(CAtegories::class, $manager));
             $artilcle[$i]->setFkTeam($this->getReferencedObject(Team::class, 1, $manager));
             $artilcle[$i]->setTitre($this->faker->word());
-            $artilcle[$i]->setArticle($this->faker->text(100));
+            $artilcle[$i]->setArticle($this->faker->paragraph(2));
             $artilcle[$i]->setDate($this->faker->dateTime());
             $artilcle[$i]->setLogo('https://loremflickr.com/640/480/pets?rand=' . '{' . rand(1, 999) . '}');
             $manager->persist($artilcle[$i]);
@@ -97,11 +97,11 @@ class AppFixtures extends Fixture
     protected function commentairesFixtures($manager)
     {
 
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <=20; $i++) {
             $commentaire[$i] = new Commentaires;
             $commentaire[$i]->setFkArticle($this->getRandonReference(Articles::class, $manager));
             $commentaire[$i]->setFkUser($this->getRandonReference(User::class, $manager));
-            $commentaire[$i]->setCommentaire($this->faker->text(100));
+            $commentaire[$i]->setCommentaire($this->faker->text(150));
             $commentaire[$i]->setDate($this->faker->dateTime());
             $manager->persist($commentaire[$i]);
         }

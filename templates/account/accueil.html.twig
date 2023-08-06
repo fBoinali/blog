@@ -1,0 +1,41 @@
+{% extends 'account/base_account.html.twig' %}
+
+{% block title %}Accueil User sur les Commentaires{% endblock %}
+
+{% block body %}
+    <h1>COMMENTAIRES de {{ user.firstname }} {{ user.lastname }}</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Commentaires</th>
+            <th>Date</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commentaire in commentaires %}
+            <tr>
+                <td>{{ commentaire.id }}</td>
+                <td>{{ commentaire.commentaire }} </td>
+                <td>{{ commentaire.date ? commentaire.date|date('d-m-Y') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_accountcommentaires_edit', {'id': commentaire.id}) }}">edit</a>
+                    <a href="{{ path('app_accountcommentaires_index', {'id': commentaire.id}) }}">supprimer</a>
+                </td>
+            </tr>
+
+            <p></p>
+            <p></p>
+            <hr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+{% endblock %}
