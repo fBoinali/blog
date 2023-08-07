@@ -7,6 +7,12 @@ Login: tom.tom@tom.fr
 Password: tom123
 
 Users: 
-$i= de 1 à 5
-Login: titi' . $i . '.titi@titi.fr
-Password: 123 (le meme pour tous les users)
+
+Login: 
+titi1.titi@titi.fr
+titi2.titi@titi.fr
+titi3.titi@titi.fr
+titi4.titi@titi.fr
+titi5.titi@titi.fr
+
+Password: 123 (meme pour ts les users)
