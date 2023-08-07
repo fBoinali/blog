@@ -67,8 +67,6 @@ class UserAccountController extends AbstractController
             $entityManager->remove($user);
             $this->container->get('security.token_storage')->setToken(null);
             $entityManager->flush();
-
-
         }
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);

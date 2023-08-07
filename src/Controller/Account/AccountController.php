@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/account')]
 class AccountController extends AbstractController
 {
-    //TODO switch to comment or just for connect
+
     #[Route('/', name: 'app_account')]
     public function index(): Response
     {
@@ -23,5 +23,7 @@ class AccountController extends AbstractController
             'commentaires'=> $commentaires,
         ]);
     }
+
+
 
 }

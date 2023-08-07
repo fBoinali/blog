@@ -47,25 +47,29 @@ class CommentairesAccountController extends AbstractController
     #[Route('/{id}', name: 'app_accountcommentaires_show', methods: ['GET'])]
     public function show(Commentaires $commentaire): Response
     {
+        $user = $this->getUser();
         return $this->render('account/commentaires/show.html.twig', [
             'commentaire' => $commentaire,
+            'user'=> $user
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_accountcommentaires_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Commentaires $commentaire, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(CommentairesType::class, $commentaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_accountcommentaires_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_account', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('account/commentaires/edit.html.twig', [
             'commentaire' => $commentaire,
+            'user' => $user,
             'form' => $form,
         ]);
     }
@@ -78,6 +82,6 @@ class CommentairesAccountController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_accountcommentaires_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_account', [], Response::HTTP_SEE_OTHER);
     }
 }

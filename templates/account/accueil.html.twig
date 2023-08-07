@@ -22,7 +22,7 @@
                 <td>{{ commentaire.date ? commentaire.date|date('d-m-Y') : '' }}</td>
                 <td>
                     <a href="{{ path('app_accountcommentaires_edit', {'id': commentaire.id}) }}">edit</a>
-                    <a href="{{ path('app_accountcommentaires_index', {'id': commentaire.id}) }}">supprimer</a>
+                    <a href="{{ path('app_accountcommentaires_delete', {'id': commentaire.id}) }}">supprimer</a>
                 </td>
             </tr>
 

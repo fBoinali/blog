@@ -14,7 +14,7 @@ class HomeArticlesController extends AbstractController
     #[Route('/articles{idCategorie}', name: 'app_homeArticles_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager, $idCategorie): Response
     {
-        // Regroupe les articles par catégorie.
+
         $listArticlesCateg = $entityManager->getRepository(Articles::class)->findBy(['fk_categories' => $idCategorie],['date'=> 'desc']);
 
         return $this->render('home/home_articlesIndex.html.twig', [
